@@ -4,14 +4,26 @@
 #
 # Copyright (c) 2017 The Authors, All Rights Reserved.
 
-apt_update 'update'
-
-
+apt_update
 
 package 'nginx'
 
+
+remote_file '/tmp/nodesource_setup.sh' do
+  source 'https://deb.nodesource.com/setup_6.x'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+end
+
+execute 'node sources' do
+	command '/tmp/nodesource_setup.sh'
+end
+
+apt_update
+
 package 'nodejs'
-package 'npm'
 
 service 'nginx' do
 	supports :restart => true, :reload => true, :start => true
