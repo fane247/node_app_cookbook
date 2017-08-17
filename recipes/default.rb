@@ -4,7 +4,7 @@
 #
 # Copyright (c) 2017 The Authors, All Rights Reserved.
 
-apt_update
+apt_update 'update'
 
 package 'nginx'
 
@@ -21,7 +21,7 @@ execute 'node sources' do
 	command '/tmp/nodesource_setup.sh'
 end
 
-apt_update
+apt_update 'update'
 
 package 'nodejs'
 
